@@ -1,5 +1,5 @@
 # The Workbook
 
-![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F086VBBS29H/dall__e_2024-12-30_15.17.02_-_a_conceptual_book_cover_design_for__the_workbook___a_creative_and_innovative_application_for_content_management_and_ai-powered_deliverables._the_cover.webp?pub_secret=ca187997b5)
+![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F087JF09AAC/20241230_1641_forging_the_workbook_simple_compose_01jgcr7fa3f2d9r8k9350zc94h.gif?pub_secret=61f89b60aa)
 
 working on the workbook here.
