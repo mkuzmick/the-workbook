@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import MarkdownEditor from '@/components/tools/markdown/MarkdownEditor';
-
+import MarkdownNoteEditor from '@/components/tools/markdown/MarkdownNoteEditor';
 interface ComponentProps {
     children: ReactNode;
 }
@@ -15,10 +14,7 @@ const Component = ({children}: ComponentProps) => {
 export default function Page() {
     return (
         <main>
-            <Component>
-                Component content
-            </Component>
-            <MarkdownEditor />
+            <MarkdownNoteEditor />
         </main>
     )
 }

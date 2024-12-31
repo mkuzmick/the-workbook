@@ -2,18 +2,22 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-// Ensure the _temp folder exists
 const tempFolder = path.resolve(process.cwd(), "_temp");
 if (!fs.existsSync(tempFolder)) {
   fs.mkdirSync(tempFolder, { recursive: true });
 }
 
+// Helper function to format the timestamp
+const formatTimestamp = (date: Date): string => {
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  const ms = date.getMilliseconds().toString().padStart(3, "0");
+  return `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}.${ms}`;
+};
+
 export async function POST(req: Request) {
   try {
-    // Parse the JSON content from the request
-    const { content } = await req.json();
+    const { content, initiationTime, submissionTime } = await req.json();
 
-    // Validate the content
     if (!content || typeof content !== "string") {
       return NextResponse.json(
         { message: "Invalid request, no markdown content provided." },
@@ -21,13 +25,24 @@ export async function POST(req: Request) {
       );
     }
 
-    // Create a unique timestamped filename for the markdown file
-    const timestamp = Date.now();
+    const yamlFrontmatter = `---
+initiationTime:
+  unix: ${initiationTime.unix}
+  utc: ${initiationTime.utc}
+  local: ${initiationTime.local}
+submissionTime:
+  unix: ${submissionTime.unix}
+  utc: ${submissionTime.utc}
+  local: ${submissionTime.local}
+---
+
+${content}`;
+
+    const timestamp = formatTimestamp(new Date());
     const fileName = `markdown-${timestamp}.md`;
     const saveTo = path.join(tempFolder, fileName);
 
-    // Write the markdown content to a file
-    fs.writeFileSync(saveTo, content);
+    fs.writeFileSync(saveTo, yamlFrontmatter);
 
     console.log(`Markdown saved to: ${fileName}`);
 
@@ -44,4 +59,4 @@ export async function POST(req: Request) {
   }
 }
 
-export const runtime = "nodejs"; // Ensure Node.js runtime for file system operations
+export const runtime = "nodejs";
