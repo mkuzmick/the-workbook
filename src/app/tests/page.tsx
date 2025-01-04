@@ -10,6 +10,7 @@ export default function Tests() {
     { name: "Markdown Notes", path: "/tests/markdown-notes" },
     { name: "Slide Carousel", path: "/tests/slide-carousel" },
     { name: "Wavy Background", path: "/tests/wavy-background" },
+    { name: "ZK Story", path: "/tests/zk-story" },
   ];
 
   return (
