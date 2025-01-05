@@ -11,6 +11,7 @@ export default function Tests() {
     { name: "Slide Carousel", path: "/tests/slide-carousel" },
     { name: "Wavy Background", path: "/tests/wavy-background" },
     { name: "ZK Story", path: "/tests/zk-story" },
+    { name: "shadcn", path: "/tests/shadcn" },
   ];
 
   return (

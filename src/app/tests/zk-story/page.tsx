@@ -54,7 +54,12 @@ const StoryBook = () => {
                     imageSrc="/images/zk-illustration-007.png"
                     text="This is a cat named Pumpkin."
                 />
+                <StorySection
+                    imageSrc="/images/zk-illustration-008.png"
+                    text="And this is the whole page of illustrations."
+                />
                 {/* Add more StorySections as needed */}
+                <div className="min-h-7"> </div>
             </div>
         </div>
     );
