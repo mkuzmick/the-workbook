@@ -1,0 +1,223 @@
+---
+title: Theorizing Digital Capitalism
+
+---
+
+# Theorizing Digital Capitalism - Collaboratively Annotated Syllabus  
+**COMP LIT 207 | Fall 2024**  
+**Professor Moira Weigel**  
+**M 3–5:45 PM | Northwest Building B104**
+
+**Teaching Assistant:** Sophie Violet Gilmore  
+Email: [svgilmore@g.harvard.edu](mailto:svgilmore@g.harvard.edu)  
+
+---
+
+## Course Description  
+
+It has become commonplace to observe that we live in a digital society. But what are its laws of motion? Do they vary from place to place? And what role do specific technologies play in mediating them? Since at least the nineteenth century, computation and capitalism have co-evolved with each other. Computers have served capital by creating new modes of accumulation, automating labor, and facilitating advertising and transactions. Yet, they have also been described as fundamentally changing or overcoming capitalism—for better or worse.  
+
+In this seminar, we will engage with recent scholarship theorizing digital capitalism and culture, paired with canonical texts cited by these works. Students will explore key concepts, debates, and methods in new media studies, critical data studies, and platform studies while reflecting on the purpose of theorizing. Assignments will guide students in identifying a research topic, reviewing scholarly literature, articulating a research question, and writing a review essay or research paper.  
+
+---
+
+## Course Guidelines  
+
+- **Attendance:** Required in-person; one unexcused absence allowed. Additional unexcused absences will lower your final grade.  
+- **Participation:** Includes submitting weekly “Quotes & Questions,” delivering a “Lightning Talk” for the “Museum of Digital Capitalism,” and contributing at least one reading to a shared Zotero folder.  
+
+See the appendix for detailed assignment information.  
+
+---
+
+## Assessment  
+
+- Attendance and Participation: **10%**  
+- Weekly Quotes & Questions: **10%** (Complete/Incomplete)  
+- Museum of Digital Capitalism Entry: **5%** (Complete/Incomplete)  
+- Lightning ⚡ Talk: **10%** (Complete/Incomplete)  
+- Book Review: **20%**  
+- Zotero Contribution: **5%** (Complete/Incomplete)  
+- Final Paper or Project: **40%**  
+  - Research Question: **5%** (Complete/Incomplete)  
+  - Annotated Bibliography: **5%** (Complete/Incomplete)  
+  - Final Submission: **30%**  
+
+---
+
+## Course Schedule  
+
+### 9/9: Course Introduction  
+**Questions:**  
+- Does digitization make capitalism more or less capitalist?  
+  *(Annotation: Digitization may intensify capitalism, connecting to processes of accelerationism and hybrid systems.)*  
+- Does it represent a break with capitalism or an intensification?  
+  *(Annotation: The role of capitalism subsuming past structures was noted as central, with references to its intensification and hybrid forms.)*
+
+**Watch:**  
+- Yanis Varoufakis, “Technofeudalism: Explaining To Slavoj Zizek Why I Think Capitalism Has Evolved Into Something Else” (2021)  
+
+**Read:**  
+- Nicholas Gane, "Capitalism is capitalism, not technofeudalism" _Journal of Classical Sociology_ (2024)  
+
+---
+
+### 9/16: Economy, Technology, and Aesthetics  
+**Questions:**  
+- How does capitalism shape culture?  
+  *(Annotation: Capitalism reshapes literature and culture by creating dislocation and new formations of value.)*  
+- What can culture tell us about capitalism?  
+  *(Annotation: The mediation of humans and technology is a recurring theme, with connections drawn to cultural and aesthetic frameworks.)*
+
+**Read:**  
+- Anna Kornbluh, *Immediacy: Or, The Style of Too Late Capitalism* (2024), pp. 1–64  
+- Fredric Jameson, "Postmodernism, or the Cultural Logic of Late Capitalism" _New Left Review_ I/146 (1984), pp. 53–92  
+- Walter Benjamin, "The Work of Art in the Age of its Technological Reproducibility" _Illuminations_, pp. 217–251  
+
+---
+
+### 9/23: Liberal and Liberalizing Media  
+**Questions:**  
+- Are interactive media inherently liberal or liberalizing? Why or why not?  
+  *(Annotation: Interactive media is not inherently liberalizing; rather, it commodifies interactions through advertising and platforms.)*
+
+**Read:**  
+- Fred Turner, *The Democratic Surround* (2013), pp. 15–76, 151–180  
+- Friedrich Hayek, “The Use of Knowledge in Society” _American Economic Review_ (1945), pp. 519–530  
+- Norbert Wiener, *The Human Use of Human Beings* (1950), pp. 1–16  
+- Orit Halpern, "The future will not be calculated" _Critical Inquiry_ (2022), pp. 334–359  
+
+---
+
+### 9/30: Alternative Programs  
+**Questions:**  
+- Could cybernetics serve socialism?  
+  *(Annotation: Socialist computing's mediation of technology and politics prompts reflection on its successes and limitations.)*  
+- What were the accomplishments and failures of socialist computing?  
+
+**Read:**  
+- Langdon Winner, “Do Artifacts Have Politics?” _Daedalus_ (1980), pp. 121–136  
+- Eden Medina, "Designing freedom, regulating a nation: Socialist cybernetics in Allende's Chile" _Journal of Latin American Studies_ (2006), pp. 571–606  
+- Benjamin Peters, "Normalizing Soviet Cybernetics" _Information & Culture_ (2012), pp. 145–175  
+
+---
+
+### 10/7: All Work and All Play  
+**Questions:**  
+- Does digitization make work into play?  
+  *(Annotation: Digitization creates blurred boundaries between work and play, fostering free labor while reinforcing exploitation.)*  
+- Or does it make everything into a form of work?  
+
+**Note:** Class meets at **The Learning Lab, 50 Church St.**  
+
+**Read:**  
+- Maurizio Lazzarato, "Immaterial Labor" (1996)  
+- Richard Barbrook, “Cybercommunism” _Science as Culture_ (2000), pp. 9–40  
+- Tiziana Terranova, “Free Labor: Producing Culture for the Digital Economy” _Social Text_ (2000)  
+- Silvia Federici, "Wages Against Housework" (1974)  
+
+---
+
+### 10/14: Indigenous People’s Day  
+**No Class**
+
+---
+
+### 10/21: Affects, Identities, and Social Reproduction  
+**Questions:**  
+- Does digitization enhance or undermine capitalism’s sustainability?  
+  *(Annotation: Digitization shapes feelings and identities, binding people to sites of exploitation and struggle.)*  
+- How does it influence feelings and identities central to social reproduction?  
+
+**Read:**  
+- Gargi Bhattacharyya, “Ten Theses on Racial Capitalism” (2018)  
+- Sara Ahmed, "Affective Economies" _Social Text_ (2004)  
+- Sareeta Amrute, *Encoding Race, Encoding Class* (2016)  
+
+---
+
+### 10/28: The Subject(s) of Surveillance  
+**Questions:**  
+- Does surveillance extend or break with older forms of power/knowledge?  
+  *(Annotation: Surveillance extends state power and influences identity through totalizing systems.)*
+
+**Read:**  
+- Philip Agre, “Surveillance and Capture” _Information Society_ (1994)  
+- Simone Browne, *Dark Matters: On the Surveillance of Blackness* (2015)  
+
+**Book Review Due: 11/1**  
+
+---
+
+### 11/4: Accumulating Data  
+**Questions:**  
+- Does Big Data extend or break with prior logics of capital accumulation?  
+  *(Annotation: Big Data accelerates new forms of labor extraction and commodification.)*  
+
+**Read:**  
+- danah boyd & Kate Crawford, “Six Provocations for Big Data” (2011)  
+- Shoshana Zuboff, “Big Other” _Journal of Information Technology_ (2015)  
+
+---
+
+### 11/11: Supply Chains and the Human Condition  
+**Questions:**  
+- Does digitization intensify or devolve control over global production?  
+  *(Annotation: Digitization transforms labor into networks of global systems.)*  
+
+**Read:**  
+- Anna Tsing, "Supply Chains and the Human Condition" _Rethinking Marxism_ (2009)  
+
+---
+
+### 11/18: Varieties of Digital Capitalism  
+**Questions:**  
+- How do platform capitalisms vary across contexts?  
+  *(Annotation: An emphasis on transnational analysis highlights the cultural and political dimensions of digital capitalism.)*  
+
+**Read:**  
+- Min Zhang, *Platformization in China*  
+
+---
+
+### 11/25: Networked Publics  
+**Questions:**  
+- Does digitization produce a more “free” marketplace of ideas?  
+  *(Annotation: Digitization commodifies public discourse, complicating notions of freedom.)*  
+
+**Read:**  
+- Sara Ahmed, "Affective Publics"  
+
+---
+
+### 12/2: Imaginaries and Futures  
+**Questions:**  
+- Can data-driven technologies transform capitalist logics?  
+  *(Annotation: Theorizing about multiple futures provides frameworks to rethink capitalist systems.)*  
+
+**Read:**  
+- Lucy Suchman, “Thingness of AI”  
+
+---
+
+## Final Deadlines  
+
+- **Annotated Bibliography Due:** 12/6  
+- **Final Papers Due:** 12/20  
+
+---
+
+## Appendix: Assignments  
+
+### Weekly Quotes & Questions  
+Submit 2–3 quotations from weekly readings by Monday at 10 AM with one substantive question.  
+
+### Museum of Digital Capitalism  
+Prepare a 3-minute Lightning Talk on an artifact of digital capitalism.  
+
+### Zotero Contributions  
+Add at least one article to the shared Zotero folder with a 250-word summary.  
+
+---
+
+**Note:** This syllabus is subject to updates and changes based on class interests.

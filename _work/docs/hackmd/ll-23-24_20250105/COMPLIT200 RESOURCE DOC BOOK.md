@@ -1,0 +1,12 @@
+---
+title: COMPLIT200 RESOURCE DOC BOOK
+
+---
+
+# COMPLIT200 RESOURCE DOC BOOK 
+
+
+* [GROUP ONE](https://hackmd.io/l4FC8KU4SNmB0wFU0c5rqQ?view)
+* [GROUP TWO](/c7UCKO8PS4-Qfo63qF9xOg)
+* [GROUP THREE](/RlHLI1tkQBubbIjWYvOw6w)
+* [long draft](/uUwJT6xdRKO1u6Gl103RHw)
