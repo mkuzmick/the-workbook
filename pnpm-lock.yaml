@@ -68,6 +68,9 @@ importers:
       framer-motion:
         specifier: 12.0.0-alpha.2
         version: 12.0.0-alpha.2(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      groq-sdk:
+        specifier: ^0.12.0
+        version: 0.12.0
       lucide-react:
         specifier: ^0.469.0
         version: 0.469.0(react@19.0.0-rc-66855b96-20241106)
@@ -86,6 +89,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-66855b96-20241106
         version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
+      react-markdown:
+        specifier: ^9.0.3
+        version: 9.0.3(@types/react@19.0.2)(react@19.0.0-rc-66855b96-20241106)
       react-syntax-highlighter:
         specifier: ^15.6.1
         version: 15.6.1(react@19.0.0-rc-66855b96-20241106)
@@ -1556,6 +1562,9 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
+  groq-sdk@0.12.0:
+    resolution: {integrity: sha512-X8ogAHYJ0pfDFAzTxSmfTCac0GznA1Ypd6t8to2SL236FY2tPSOZrOhIBAobPx+oey/6WI96MbvT6VvvjCDTCQ==}
+
   has-bigints@1.1.0:
     resolution: {integrity: sha512-R3pbpkcIqv2Pm3dUwgjclDRVmWpTJW2DcMzcIhEXEx1oh/CEMObMm3KLmRJOdvhM7o4uQBnwr8pzRK2sJWIqfg==}
     engines: {node: '>= 0.4'}
@@ -1607,6 +1616,9 @@ packages:
 
   highlightjs-vue@1.0.0:
     resolution: {integrity: sha512-PDEfEF102G23vHmPhLyPboFCD+BkMGu+GuJe2d9/eH4FsCwvgBpnc9n0pGE+ffKdph38s6foEZiEjdgHdzp+IA==}
+
+  html-url-attributes@3.0.1:
+    resolution: {integrity: sha512-ol6UPyBWqsrO6EJySPz2O7ZSr856WDrEzM5zMqp+FJJLGMW35cLYmmZnl0vztAZxRUoNZJFTCohfjuIJ8I4QBQ==}
 
   humanize-ms@1.2.1:
     resolution: {integrity: sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ==}
@@ -2256,6 +2268,12 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-markdown@9.0.3:
+    resolution: {integrity: sha512-Yk7Z94dbgYTOrdk41Z74GoKA7rThnsbbqBTRYuxoe08qvfQ9tJVhmAKw6BJS/ZORG7kTy/s1QvYzSuaoBA1qfw==}
+    peerDependencies:
+      '@types/react': '>=18'
+      react: '>=18'
 
   react-remove-scroll-bar@2.3.8:
     resolution: {integrity: sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==}
@@ -4344,6 +4362,18 @@ snapshots:
 
   graphemer@1.4.0: {}
 
+  groq-sdk@0.12.0:
+    dependencies:
+      '@types/node': 18.19.70
+      '@types/node-fetch': 2.6.12
+      abort-controller: 3.0.0
+      agentkeepalive: 4.6.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
   has-bigints@1.1.0: {}
 
   has-flag@4.0.0: {}
@@ -4426,6 +4456,8 @@ snapshots:
   highlight.js@10.7.3: {}
 
   highlightjs-vue@1.0.0: {}
+
+  html-url-attributes@3.0.1: {}
 
   humanize-ms@1.2.1:
     dependencies:
@@ -5262,6 +5294,23 @@ snapshots:
       scheduler: 0.25.0-rc-66855b96-20241106
 
   react-is@16.13.1: {}
+
+  react-markdown@9.0.3(@types/react@19.0.2)(react@19.0.0-rc-66855b96-20241106):
+    dependencies:
+      '@types/hast': 3.0.4
+      '@types/react': 19.0.2
+      devlop: 1.1.0
+      hast-util-to-jsx-runtime: 2.3.2
+      html-url-attributes: 3.0.1
+      mdast-util-to-hast: 13.2.0
+      react: 19.0.0-rc-66855b96-20241106
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.1
+      unified: 11.0.5
+      unist-util-visit: 5.0.0
+      vfile: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
 
   react-remove-scroll-bar@2.3.8(@types/react@19.0.2)(react@19.0.0-rc-66855b96-20241106):
     dependencies:
