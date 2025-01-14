@@ -58,7 +58,6 @@ const academicDisciplines = [
   'Banana Peel Slapstick Science'
 ];
 
-
 export default function Page() {
   const [words, setWords] = useState<string[]>([]);
   const [isVisible, setIsVisible] = useState(true);
@@ -88,8 +87,12 @@ export default function Page() {
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
+      // Enter fullscreen
       containerRef.current?.requestFullscreen();
+      // Hide the button immediately upon entering fullscreen
+      setShowFullscreenButton(false);
     } else {
+      // Exit fullscreen
       document.exitFullscreen();
     }
   };
@@ -98,7 +101,11 @@ export default function Page() {
     const handleFullscreenChange = () => {
       const isNowFullscreen = !!document.fullscreenElement;
       setIsFullscreen(isNowFullscreen);
-      setShowFullscreenButton(!isNowFullscreen);
+
+      // If we just exited fullscreen, show the button again
+      if (!isNowFullscreen) {
+        setShowFullscreenButton(true);
+      }
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -115,7 +122,7 @@ export default function Page() {
         setTimeout(() => {
           setWords(newWords);
           setIsVisible(true);
-        }, 500); // Shortened transition time to prevent words from disappearing for too long
+        }, 500);
       }
     };
 
@@ -128,18 +135,39 @@ export default function Page() {
     <main
       ref={containerRef}
       className="min-h-screen w-full bg-black flex flex-col items-start justify-start relative"
-      onMouseEnter={() => isFullscreen && setShowFullscreenButton(true)}
-      onMouseLeave={() => isFullscreen && setShowFullscreenButton(false)}
     >
-      {/* Fullscreen Toggle Button */}
-      {showFullscreenButton && (
+      {/* 
+        We always render the fullscreen button in the DOM, 
+        but wrap it in a small <div> that detects hover. 
+      */}
+      <div
+        className="absolute top-4 right-4"
+        // Only show the button (setShowFullscreenButton(true)) on hover
+        onMouseEnter={() => {
+          // Only show if we are in fullscreen
+          // (or if it was otherwise hidden)
+          if (isFullscreen) {
+            setShowFullscreenButton(true);
+          }
+        }}
+        // Hide the button again when not hovering
+        onMouseLeave={() => {
+          if (isFullscreen) {
+            setShowFullscreenButton(false);
+          }
+        }}
+      >
         <button
           onClick={toggleFullscreen}
-          className="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity duration-300"
+          className={`
+            bg-white text-black px-4 py-2 rounded-md 
+            hover:bg-gray-200 transition-opacity duration-300
+            ${showFullscreenButton ? 'opacity-100' : 'opacity-0'}
+          `}
         >
           Toggle Fullscreen
         </button>
-      )}
+      </div>
 
       <div
         className={`transition-opacity ${
