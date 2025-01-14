@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-
-// Import Inter font directly
 import { Inter } from 'next/font/google';
 
 const inter = Inter({
@@ -10,79 +8,84 @@ const inter = Inter({
   weight: '900',
 });
 
-// List of academic disciplines
 const academicDisciplines = [
   'Physics',
-  'Chemistry',
-  'Biology',
-  'Mathematics',
-  'Computer Science',
-  'Economics',
-  'Psychology',
-  'Philosophy',
-  'Sociology',
-  'Political Science',
-  'Anthropology',
-  'History',
-  'Art History',
-  'Linguistics',
-  'Literature',
-  'Engineering',
-  'Law',
-  'Medicine',
-  'Environmental Science',
-  'Geography',
-  'Astronomy',
-  'Education',
-  'Business Administration',
-  'Architecture',
-  'Theology',
-  'Statistics',
-  'Music',
-  'Performing Arts',
-  'Archaeology',
+  'Taylor Swift Studies',
+  'Tech Bro Studies',
+  'OpenAI Studies',
+  'English Premier League Studies',
+  'English Literature',
+  'Cheesecake Factory Studies',
+  'Memeology',
+  'Avocado Toast Economics',
+  'Cat Video Criticism',
+  'Social Media Archaeology',
+  'Coffee Shop Sociology',
+  'Emoji Linguistics',
+  'Cryptocurrency Philosophy',
+  'Astrology for Engineers',
+  'Pizza Topping Taxonomy',
+  'Procrastination Dynamics',
+  'Quantum Procrastination',
+  'Theme Park Anthropology',
+  'K-Popology',
+  'Internet Rabbit Hole Exploration',
+  'Reality TV Narratology',
+  'DIY Disaster Studies',
+  'Bagel Science',
+  'Sock Drawer Organization Theory',
+  'Hoverboard Safety Engineering',
+  'Cupcake Structural Analysis',
+  'Fandom Studies',
+  'Nostalgia Management',
+  'Spaceship Interior Design',
+  'Popcorn Physics',
+  'Post-Apocalyptic Gardening',
+  'Game Show Strategy',
+  'Invisible Ink Calligraphy',
+  'Fantasy World Cartography',
+  'Haunted House Architecture',
+  'Laughter Acoustics',
+  'Dragon Mythology',
+  'Unicorn Ecology',
+  'Video Game Lore Analysis',
+  'Couch Potato Studies',
+  'Pencil Sharpener Mechanics',
+  'Bubble Wrap Dynamics',
+  'Pirate Code Ethics',
+  'Superhero Costume Design',
+  'Gummy Bear Chemistry',
+  'Banana Peel Slapstick Science'
 ];
+
 
 export default function Page() {
   const [words, setWords] = useState<string[]>([]);
   const [isVisible, setIsVisible] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showFullscreenButton, setShowFullscreenButton] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Function to get a random discipline
-  const getRandomDiscipline = (): string => {
-    return academicDisciplines[Math.floor(Math.random() * academicDisciplines.length)];
-  };
+  const getRandomDiscipline = (): string =>
+    academicDisciplines[Math.floor(Math.random() * academicDisciplines.length)];
 
-  // Fetch 12 words from your structured API route
-  async function fetchWords(): Promise<string[]> {
+  const fetchWords = async (): Promise<string[]> => {
     try {
-      const discipline = getRandomDiscipline(); // Get a random discipline
+      const discipline = getRandomDiscipline();
       const res = await fetch('/api/openai/structured', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: discipline }),
       });
-
-      if (!res.ok) {
-        throw new Error(`API call failed with status ${res.status}`);
-      }
-
+      if (!res.ok) throw new Error(`API call failed: ${res.status}`);
       const data = await res.json();
-      if (data.refusal) {
-        console.error('Refusal from OpenAI:', data.refusal);
-        return [];
-      }
-
       return data.words || [];
     } catch (error) {
       console.error('Error fetching words:', error);
       return [];
     }
-  }
+  };
 
-  // Handle fullscreen toggle
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       containerRef.current?.requestFullscreen();
@@ -92,52 +95,64 @@ export default function Page() {
   };
 
   useEffect(() => {
-    const updateWords = async () => {
-      // Fetch new words
-      const newWords = await fetchWords();
-      if (newWords.length > 0) {
-        // Fade out the old words
-        setIsVisible(false);
+    const handleFullscreenChange = () => {
+      const isNowFullscreen = !!document.fullscreenElement;
+      setIsFullscreen(isNowFullscreen);
+      setShowFullscreenButton(!isNowFullscreen);
+    };
 
-        // Wait for the fade-out transition to complete
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateWords = async () => {
+      const newWords = await fetchWords();
+      if (newWords.length) {
+        setIsVisible(false);
         setTimeout(() => {
-          setWords(newWords); // Update with new words
-          setIsVisible(true); // Fade in new words
-        }, 2000); // Match this timeout to the transition duration
+          setWords(newWords);
+          setIsVisible(true);
+        }, 500); // Shortened transition time to prevent words from disappearing for too long
       }
     };
 
-    // Initial fetch
     updateWords();
-
-    // Schedule updates every 10 seconds
-    const intervalId = setInterval(updateWords, 10000);
-
-    return () => clearInterval(intervalId);
+    const interval = setInterval(updateWords, 15000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <main ref={containerRef} className="min-h-screen w-full bg-black flex flex-col items-start justify-start relative">
+    <main
+      ref={containerRef}
+      className="min-h-screen w-full bg-black flex flex-col items-start justify-start relative"
+      onMouseEnter={() => isFullscreen && setShowFullscreenButton(true)}
+      onMouseLeave={() => isFullscreen && setShowFullscreenButton(false)}
+    >
       {/* Fullscreen Toggle Button */}
-      <button
-        onClick={toggleFullscreen}
-        className="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200"
-      >
-        Toggle Fullscreen
-      </button>
+      {showFullscreenButton && (
+        <button
+          onClick={toggleFullscreen}
+          className="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity duration-300"
+        >
+          Toggle Fullscreen
+        </button>
+      )}
 
       <div
         className={`transition-opacity ${
           isVisible ? 'opacity-100' : 'opacity-0'
         } flex flex-col`}
-        style={{ transitionDuration: '2000ms', width: '100%' }} // Inline style for custom duration
+        style={{ transitionDuration: '500ms', width: '100%' }}
       >
         <div
           className={`${inter.className} text-white font-extrabold leading-tight`}
           style={{
-            fontSize: '8.333vh', // Dynamically calculated to fit 12 words vertically
-            lineHeight: '1', // Minimal spacing between lines
-            paddingLeft: '2rem', // Consistent left alignment
+            fontSize: '5vh',
+            lineHeight: '1',
+            paddingLeft: '2rem',
           }}
         >
           {words.map((word, idx) => (

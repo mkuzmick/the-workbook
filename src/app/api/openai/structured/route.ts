@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: 'system',
-          content: 'You are a helpful assistant. Return exactly 12 words related to the academic discipline provided in the user prompt. Adhere strictly to the JSON schema: { words: string[] } with exactly 12 entries.',
+          content: 'You are a helpful assistant. Return exactly 15 words related to the academic discipline provided in the user prompt. If it is cultural (like an author or musician) try to include some of the one-word titles of works they are associated with. Try to be both generic and specific, both serious and a little playful in your choices. Adhere strictly to the JSON schema: { words: string[] } with exactly 15 entries.',
         },
         {
           role: 'user',
