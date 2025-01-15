@@ -56,7 +56,7 @@ export default function CoolPhrasesPage() {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-black text-white">
-      <div className={`relative text-center ${inter.className}`} style={{ fontSize: '10vh' }}>
+      <div className={`relative text-center ${inter.className}`} style={{ fontSize: '7vh' }}>
         {visiblePhrases.map((phrase, idx) => (
           <div
             key={idx}

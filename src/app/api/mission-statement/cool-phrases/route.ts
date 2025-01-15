@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     const phrases = records
       .map((record) => record.fields?.Phrase)
       .filter(Boolean) as string[];
-
+    console.log('phrases:', phrases);
     return NextResponse.json({ phrases });
   } catch (error) {
     console.error('Error fetching data from Airtable:', error);
