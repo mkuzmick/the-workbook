@@ -1,5 +1,5 @@
 import { WavyBackground } from "@/components/ui/wavy-background";
-
+import SplashCursor from "@/components/reactbits/SplashCursor/SplashCursor";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <div className="flex flex-grow items-center justify-center">
         <h1 className="text-8xl font-black inter-var text-white">The Workbook</h1>
       </div>
-
+      <SplashCursor />
       <p className="text-base md:text-lg mt-4 text-white font-normal inter-var text-center">
         the place to get some work done in 2025
       </p>
