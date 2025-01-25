@@ -1,6 +1,6 @@
 import Airtable from 'airtable';
 import Image from 'next/image';
-import { Metadata } from 'next';
+// import { Metadata } from 'next';
 
 // Configure Airtable
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN });
