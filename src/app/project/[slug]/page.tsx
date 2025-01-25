@@ -71,31 +71,31 @@ export default async function Page({
   }
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  try {
-    const project = await getProjectBySlug(params.slug);
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { slug: string };
+// }): Promise<Metadata> {
+//   try {
+//     const project = await getProjectBySlug(params.slug);
 
-    return {
-      title: project.name,
-      description: project.description,
-      openGraph: {
-        images: [project.imageUrl],
-      },
-    };
-  } catch {
-    return {
-      title: 'Project Not Found',
-      description: 'The requested project could not be found.',
-    };
-  } finally {
-    console.log(`Finished attempting to generate metadata for slug: "${params.slug}"`);
-    // Add any other necessary cleanup or actions here
-  }
-}
+//     return {
+//       title: project.name,
+//       description: project.description,
+//       openGraph: {
+//         images: [project.imageUrl],
+//       },
+//     };
+//   } catch {
+//     return {
+//       title: 'Project Not Found',
+//       description: 'The requested project could not be found.',
+//     };
+//   } finally {
+//     console.log(`Finished attempting to generate metadata for slug: "${params.slug}"`);
+//     // Add any other necessary cleanup or actions here
+//   }
+// }
 
 export async function generateStaticParams() {
   const records = await base('Projects').select().all();
