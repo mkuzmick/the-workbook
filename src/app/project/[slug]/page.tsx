@@ -40,13 +40,18 @@ async function getProjectBySlug(slug: string): Promise<Project> {
   }
 }
 
-// Remove PageProps interface and type directly
+// Page Component
 export default async function Page({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params;
+  const { slug } = await params; // Correctly await params
+
+  if (!slug) {
+    console.error("Slug is undefined.");
+    return <div>Project not found</div>;
+  }
 
   try {
     const project = await getProjectBySlug(slug);
@@ -55,48 +60,58 @@ export default async function Page({
       <div>
         <h1>{project.name}</h1>
         <p>{project.description}</p>
-        <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+        <div style={{ position: "relative", width: "100%", height: "400px" }}>
           <Image
             src={project.imageUrl}
             alt={project.name}
             fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
           />
         </div>
       </div>
     );
   } catch (error) {
-    console.error(error);
+    console.error(`Error rendering project with slug "${slug}":`, error);
     return <div>Project not found</div>;
   }
 }
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { slug: string };
-// }): Promise<Metadata> {
-//   try {
-//     const project = await getProjectBySlug(params.slug);
+// Metadata Function
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { slug } = await params; // Correctly await params
 
-//     return {
-//       title: project.name,
-//       description: project.description,
-//       openGraph: {
-//         images: [project.imageUrl],
-//       },
-//     };
-//   } catch {
-//     return {
-//       title: 'Project Not Found',
-//       description: 'The requested project could not be found.',
-//     };
-//   } finally {
-//     console.log(`Finished attempting to generate metadata for slug: "${params.slug}"`);
-//     // Add any other necessary cleanup or actions here
-//   }
-// }
+  if (!slug) {
+    return {
+      title: 'Project Not Found',
+      description: 'The requested project could not be found.',
+    };
+  }
 
+  try {
+    const project = await getProjectBySlug(slug);
+
+    return {
+      title: project.name,
+      description: project.description,
+      openGraph: {
+        images: [project.imageUrl],
+      },
+    };
+  } catch {
+    return {
+      title: 'Project Not Found',
+      description: 'The requested project could not be found.',
+    };
+  } finally {
+    console.log(`Finished attempting to generate metadata for slug: "${slug}"`);
+  }
+}
+
+// Static Params
 export async function generateStaticParams() {
   const records = await base('Projects').select().all();
 
