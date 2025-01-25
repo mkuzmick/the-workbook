@@ -1251,8 +1251,8 @@ function SplashCursor({
   ]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10">
-      <canvas ref={canvasRef} id="fluid" className="w-full h-full" />
+    <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10" style={{ cursor: "none"}}>
+      <canvas ref={canvasRef} id="fluid" className="w-full h-full" style={{ cursor: "none"}} />
     </div>
   );
 
