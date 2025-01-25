@@ -8,7 +8,6 @@ export async function POST(req: Request) {
 
     // Parse the request body
     const { input } = await req.json();
-
     console.log("Parsed input from request body:", input);
 
     if (!input || typeof input !== "string") {
@@ -21,7 +20,7 @@ export async function POST(req: Request) {
 
     // Initialize the Anthropics SDK
     const anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY || "" // Ensure this is set in your .env.local
+      apiKey: process.env.ANTHROPIC_API_KEY || "", // Ensure this is set in your .env.local
     });
 
     console.log("Calling Anthropics API with input:", input);
@@ -30,13 +29,14 @@ export async function POST(req: Request) {
     const response = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20241022",
       max_tokens: 1024,
-      messages: [{ role: "user", content: input }]
+      messages: [{ role: "user", content: input }],
     });
 
-    console.log("Response from Anthropics API:", response);
+    console.log("Response from Anthropics API:", JSON.stringify(response, null, 2));
 
-    // Extract and return the text content from the response
+    // Extract and return the text content from the first content block
     const textContent = response.content?.[0]?.text;
+
     if (!textContent) {
       console.error("No valid text content found in response.");
       return NextResponse.json(
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       message: "Success",
-      completion: textContent
+      completion: textContent,
     });
   } catch (error) {
     console.error("Error calling Anthropics API:", error);
