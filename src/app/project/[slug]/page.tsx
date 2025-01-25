@@ -34,11 +34,8 @@ async function getProjectBySlug(slug: string) {
     // Add any cleanup logic here, if necessary
   }
 }
-export default async function Page({
-  params,
-}: {
-  params: { slug: string };
-}) {
+
+export default async function Page({ params }) {
   const { slug } = await params;
 
   if (!slug) {
