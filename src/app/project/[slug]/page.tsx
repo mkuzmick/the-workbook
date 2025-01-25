@@ -1,15 +1,12 @@
 import Airtable from 'airtable';
-import Image from 'next/image'; // Import the Image component
+import Image from 'next/image';
 import { Metadata } from 'next';
-
-interface Params {
-  slug: string;
-}
 
 // Configure Airtable
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN });
 const base = airtable.base(process.env.AIRTABLE_REPORT_BASE!);
 
+// Utility function to fetch a project by its slug
 async function getProjectBySlug(slug: string) {
   const records = await base('Projects')
     .select({
@@ -30,7 +27,8 @@ async function getProjectBySlug(slug: string) {
   };
 }
 
-export default async function Page({ params }: { params: Params }) {
+// Page Component
+export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
   try {
@@ -46,8 +44,8 @@ export default async function Page({ params }: { params: Params }) {
           <Image
             src={project.imageUrl}
             alt={project.name}
-            layout="fill" // Makes the image fill the parent container
-            objectFit="cover" // Adjust the behavior (e.g., "contain", "cover", etc.)
+            layout="fill"
+            objectFit="cover"
           />
         </div>
       </div>
@@ -58,7 +56,8 @@ export default async function Page({ params }: { params: Params }) {
   }
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+// Metadata Generator
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   try {
     const project = await getProjectBySlug(params.slug);
 
@@ -75,4 +74,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       description: 'The requested project could not be found.',
     };
   }
+}
+
+// Generate Static Params
+export async function generateStaticParams() {
+  const records = await base('Projects').select().all();
+
+  return records.map((record) => ({
+    slug: record.get('Slug') as string,
+  }));
 }
