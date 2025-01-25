@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import SplashCursor from "@/components/reactbits/SplashCursor/SplashCursor";
 import SplashCursor01 from "@/components/reactbits/SplashCursor/SplashCursor01";
+import SplashCursorZibb from "@/components/reactbits/SplashCursor/SplashCursorZibb";
 import AllPages from "@/components/tools/links/AllPages";
 
 const SamplePreBlock = () => {
@@ -37,7 +38,7 @@ export default function Home() {
           {/* 2) Fluid simulation above background, behind text */}
           <div className="absolute inset-0 z-10">
             {/* <SplashCursor /> */}
-            <SplashCursor01 />
+            <SplashCursorZibb />
           </div>
   
           {/* 3) Hero text content on top */}
