@@ -6,8 +6,18 @@ import { Metadata } from 'next';
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN });
 const base = airtable.base(process.env.AIRTABLE_REPORT_BASE!);
 
+interface PageProps {
+  params: { slug: string };
+}
+
+interface Project {
+  name: string;
+  description: string;
+  imageUrl: string;
+}
+
 // Utility function to fetch a project by its slug
-async function getProjectBySlug(slug: string) {
+async function getProjectBySlug(slug: string): Promise<Project> {
   
   const records = await base('Projects')
     .select({
@@ -29,7 +39,7 @@ async function getProjectBySlug(slug: string) {
 }
 
 // Page Component
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: PageProps) {
   const { slug } = await params;
 
   try {
@@ -58,7 +68,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 }
 
 // Metadata Generator
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   try {
     const project = await getProjectBySlug(params.slug);
 
