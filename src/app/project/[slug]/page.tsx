@@ -8,6 +8,7 @@ const base = airtable.base(process.env.AIRTABLE_REPORT_BASE!);
 
 // Utility function to fetch a project by its slug
 async function getProjectBySlug(slug: string) {
+  
   const records = await base('Projects')
     .select({
       filterByFormula: `{Slug} = "${slug}"`,
@@ -29,7 +30,7 @@ async function getProjectBySlug(slug: string) {
 
 // Page Component
 export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   try {
     const project = await getProjectBySlug(slug);
