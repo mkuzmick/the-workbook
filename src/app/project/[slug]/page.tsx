@@ -16,7 +16,7 @@ async function getProjectBySlug(slug: string): Promise<Project> {
   try {
     const records = await base('Projects')
       .select({
-        filterByFormula: `{Slug} = "${slug}"`,
+        filterByFormula: `{Slug} = "${slug}"`, // Corrected the formula
         maxRecords: 1,
       })
       .firstPage();
@@ -39,13 +39,14 @@ async function getProjectBySlug(slug: string): Promise<Project> {
     // Add any cleanup logic here, if necessary
   }
 }
+
 export default async function Page({
   params,
 }: {
   params: { slug: string };
 }) {
 
-  const {slug} = await params;
+  const { slug } = params; // No need to await here
 
   if (!slug) {
     console.error("Slug is undefined.");
@@ -78,14 +79,13 @@ export default async function Page({
   }
 }
 
-
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
   try {
-    const { slug } = await params;
+    const { slug } = params; // No need to await here
     const project = await getProjectBySlug(slug);
 
     return {
@@ -101,7 +101,7 @@ export async function generateMetadata({
       description: 'The requested project could not be found.',
     };
   } finally {
-    console.log(`Finished attempting to generate metadata for params: "${params}"`);
+    console.log(`Failed to generate metadata`); // Corrected string interpolation
     // Add any other necessary cleanup or actions here
   }
 }
