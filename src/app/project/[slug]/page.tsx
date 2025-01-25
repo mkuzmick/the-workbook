@@ -76,40 +76,40 @@ export default async function Page({
   }
 }
 
-// Metadata Function
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = await params; // Correctly await params
+// // Metadata Function
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { slug: string };
+// }): Promise<Metadata> {
+//   const { slug } = await params; // Correctly await params
 
-  if (!slug) {
-    return {
-      title: 'Project Not Found',
-      description: 'The requested project could not be found.',
-    };
-  }
+//   if (!slug) {
+//     return {
+//       title: 'Project Not Found',
+//       description: 'The requested project could not be found.',
+//     };
+//   }
 
-  try {
-    const project = await getProjectBySlug(slug);
+//   try {
+//     const project = await getProjectBySlug(slug);
 
-    return {
-      title: project.name,
-      description: project.description,
-      openGraph: {
-        images: [project.imageUrl],
-      },
-    };
-  } catch {
-    return {
-      title: 'Project Not Found',
-      description: 'The requested project could not be found.',
-    };
-  } finally {
-    console.log(`Finished attempting to generate metadata for slug: "${slug}"`);
-  }
-}
+//     return {
+//       title: project.name,
+//       description: project.description,
+//       openGraph: {
+//         images: [project.imageUrl],
+//       },
+//     };
+//   } catch {
+//     return {
+//       title: 'Project Not Found',
+//       description: 'The requested project could not be found.',
+//     };
+//   } finally {
+//     console.log(`Finished attempting to generate metadata for slug: "${slug}"`);
+//   }
+// }
 
 // Static Params
 export async function generateStaticParams() {
