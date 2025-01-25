@@ -6,19 +6,13 @@ import { Metadata } from 'next';
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN });
 const base = airtable.base(process.env.AIRTABLE_REPORT_BASE!);
 
-interface PageProps {
-  params: { slug: string };
-}
-
 interface Project {
   name: string;
   description: string;
   imageUrl: string;
 }
 
-// Utility function to fetch a project by its slug
 async function getProjectBySlug(slug: string): Promise<Project> {
-  
   const records = await base('Projects')
     .select({
       filterByFormula: `{Slug} = "${slug}"`,
@@ -38,8 +32,12 @@ async function getProjectBySlug(slug: string): Promise<Project> {
   };
 }
 
-// Page Component
-export default async function Page({ params }: PageProps) {
+// Remove PageProps interface and type directly
+export default async function Page({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
 
   try {
@@ -49,14 +47,12 @@ export default async function Page({ params }: PageProps) {
       <div>
         <h1>{project.name}</h1>
         <p>{project.description}</p>
-
-        {/* Use a responsive container for the image */}
         <div style={{ position: 'relative', width: '100%', height: '400px' }}>
           <Image
             src={project.imageUrl}
             alt={project.name}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
           />
         </div>
       </div>
@@ -67,8 +63,12 @@ export default async function Page({ params }: PageProps) {
   }
 }
 
-// Metadata Generator
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+// Update generateMetadata parameter typing
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   try {
     const project = await getProjectBySlug(params.slug);
 
@@ -87,7 +87,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-// Generate Static Params
 export async function generateStaticParams() {
   const records = await base('Projects').select().all();
 
