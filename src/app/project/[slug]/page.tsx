@@ -6,13 +6,8 @@ import Image from 'next/image';
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN });
 const base = airtable.base(process.env.AIRTABLE_REPORT_BASE!);
 
-interface Project {
-  name: string;
-  description: string;
-  imageUrl: string;
-}
 
-async function getProjectBySlug(slug: string): Promise<Project> {
+async function getProjectBySlug(slug: string) {
   try {
     const records = await base('Projects')
       .select({
@@ -39,14 +34,12 @@ async function getProjectBySlug(slug: string): Promise<Project> {
     // Add any cleanup logic here, if necessary
   }
 }
-
-// Page Component
 export default async function Page({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { slug } = await params; // Correctly await params
+  const { slug } = await params;
 
   if (!slug) {
     console.error("Slug is undefined.");
@@ -76,42 +69,6 @@ export default async function Page({
   }
 }
 
-// // Metadata Function
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { slug: string };
-// }): Promise<Metadata> {
-//   const { slug } = await params; // Correctly await params
-
-//   if (!slug) {
-//     return {
-//       title: 'Project Not Found',
-//       description: 'The requested project could not be found.',
-//     };
-//   }
-
-//   try {
-//     const project = await getProjectBySlug(slug);
-
-//     return {
-//       title: project.name,
-//       description: project.description,
-//       openGraph: {
-//         images: [project.imageUrl],
-//       },
-//     };
-//   } catch {
-//     return {
-//       title: 'Project Not Found',
-//       description: 'The requested project could not be found.',
-//     };
-//   } finally {
-//     console.log(`Finished attempting to generate metadata for slug: "${slug}"`);
-//   }
-// }
-
-// Static Params
 export async function generateStaticParams() {
   const records = await base('Projects').select().all();
 
