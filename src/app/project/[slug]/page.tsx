@@ -6,11 +6,11 @@ import { Metadata } from 'next';
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN });
 const base = airtable.base(process.env.AIRTABLE_REPORT_BASE!);
 
-interface Project {
-  name: string;
-  description: string;
-  imageUrl: string;
-}
+// interface Project {
+//   name: string;
+//   description: string;
+//   imageUrl: string;
+// }
 
 async function getProjectBySlug(slug: string) {
   try {
