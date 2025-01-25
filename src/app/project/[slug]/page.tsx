@@ -2,11 +2,9 @@ import Airtable from 'airtable';
 import Image from 'next/image'; // Import the Image component
 import { Metadata } from 'next';
 
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
+interface Params {
+  slug: string;
+}
 
 // Configure Airtable
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN });
@@ -32,7 +30,7 @@ async function getProjectBySlug(slug: string) {
   };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
 
   try {
@@ -60,7 +58,7 @@ export default async function Page({ params }: PageProps) {
   }
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   try {
     const project = await getProjectBySlug(params.slug);
 
