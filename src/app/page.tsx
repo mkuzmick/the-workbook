@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
-import SplashCursor from "@/components/reactbits/SplashCursor/SplashCursor";
-import SplashCursor01 from "@/components/reactbits/SplashCursor/SplashCursor01";
+// import SplashCursor from "@/components/reactbits/SplashCursor/SplashCursor";
+// import SplashCursor01 from "@/components/reactbits/SplashCursor/SplashCursor01";
 import SplashCursorZibb from "@/components/reactbits/SplashCursor/SplashCursorZibb";
 import AllPages from "@/components/tools/links/AllPages";
 

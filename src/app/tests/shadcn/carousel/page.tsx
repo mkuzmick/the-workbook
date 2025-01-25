@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+// import { ReactNode } from 'react';
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { BsChevronDown } from "react-icons/bs";
-import SplashCursor from "@/components/reactbits/SplashCursor/SplashCursor";
+// import Link from "next/link";
+// import { BsChevronDown } from "react-icons/bs";
+// import SplashCursor from "@/components/reactbits/SplashCursor/SplashCursor";
 
 export default function Home() {
   return (

@@ -1,4 +1,5 @@
 import Airtable from 'airtable';
+import Image from 'next/image'; // Import the Image component
 
 type Props = {
   params: {
@@ -24,9 +25,9 @@ async function getProjectBySlug(slug: string) {
 
   const record = records[0];
   return {
-    name: record.get('Name'),
-    description: record.get('Description'),
-    imageUrl: record.get('ImageUrl'),
+    name: record.get('Name') as string,
+    description: record.get('Description') as string,
+    imageUrl: record.get('ImageUrl') as string,
   };
 }
 
@@ -40,10 +41,20 @@ export default async function Page({ params }: Props) {
       <div>
         <h1>{project.name}</h1>
         <p>{project.description}</p>
-        <img src={project.imageUrl} alt={project.name} />
+        
+        {/* Use a responsive container for the image */}
+        <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+          <Image
+            src={project.imageUrl}
+            alt={project.name}
+            layout="fill" // Makes the image fill the parent container
+            objectFit="cover" // Adjust the behavior (e.g., "contain", "cover", etc.)
+          />
+        </div>
       </div>
     );
   } catch (error) {
+    console.error(error);
     return <div>Project not found</div>;
   }
 }

@@ -1,12 +1,14 @@
-import { ReactNode } from 'react';
+// import { ReactNode } from 'react';
 import Image from "next/image";
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 
-interface TimelineTestProps {
-    children: ReactNode;
-}
-const TimelineTest = ({children}: TimelineTestProps) => {
+// interface TimelineTestProps {
+//     _children: ReactNode;
+// }
+const TimelineTest = (
+  // {_children}: TimelineTestProps
+) => {
   const data = [
     {
       title: "2024",

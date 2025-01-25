@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Airtable from 'airtable';
 
-export async function GET(_req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
+    console.log('req', req)
+    // Initialize Airtable client
+
+    const { searchParams } = new URL(req.url);
+
+    // Convert searchParams to a plain object
+    const queryParams = Object.fromEntries(searchParams.entries());
+  
+    // Log the JSON stringified query parameters
+    console.log(JSON.stringify(queryParams, null, 2));
     // Initialize Airtable client
     const base = new Airtable({ apiKey: process.env.AIRTABLE_MISSION_TOKEN }).base(
       process.env.AIRTABLE_MISSION_BASE!

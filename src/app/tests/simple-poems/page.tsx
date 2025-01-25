@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import Head from 'next/head';
 
 export default function Page() {
   const poemTypes = ['Haiku', 'Limerick', 'Sonnet'];
@@ -109,13 +108,8 @@ export default function Page() {
 
   return (
     <>
-      {/* Import Google Font */}
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      
+      
 
       <main className="min-h-screen bg-black text-white p-6 font-sans">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6">

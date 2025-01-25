@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+// import { ReactNode } from "react";
 import MarkdownNoteEditor from "@/components/tools/markdown/MarkdownNoteEditor";
 
 export default function Page() {

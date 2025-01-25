@@ -50,7 +50,6 @@ export default function DejargonifyPage() {
       // Clean up
       stopRecording();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const startRecording = () => {

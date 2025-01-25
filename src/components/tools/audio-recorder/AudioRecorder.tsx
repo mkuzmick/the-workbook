@@ -39,6 +39,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onSyncComplete }) => {
       mediaRecorder.start();
       setIsRecording(true);
     } catch (err) {
+      console.error("Error accessing audio input:", err);
       setError("Error accessing audio input. Please check your microphone permissions.");
     }
   };
@@ -81,6 +82,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({ onSyncComplete }) => {
         setError("Failed to sync audio with server.");
       }
     } catch (err) {
+      console.error("Error syncing audio:", err);
       setError("Error syncing audio to server.");
     } finally {
       setIsUploading(false);
