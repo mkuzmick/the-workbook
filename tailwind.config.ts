@@ -51,12 +51,21 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
+
   		},
+		fontFamily: {
+			sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui'],
+			mono: ['var(--font-ibm-plex-mono)', 'ui-monospace', 'monospace'],
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		dropShadow: {
+		'custom': '0 4px 6px rgba(0, 0, 0, 0.1)',
+		'deep': '0 8px 20px rgba(0, 0, 0, 0.9)',
+		},
   	}
   },
   plugins: [

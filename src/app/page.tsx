@@ -4,6 +4,28 @@ import SplashCursor from "@/components/reactbits/SplashCursor/SplashCursor";
 import SplashCursor01 from "@/components/reactbits/SplashCursor/SplashCursor01";
 import AllPages from "@/components/tools/links/AllPages";
 
+const SamplePreBlock = () => {
+  const chartColors = {
+    chart: {
+      '1': 'hsl(var(--chart-1))',
+      '2': 'hsl(var(--chart-2))',
+      '3': 'hsl(var(--chart-3))',
+      '4': 'hsl(var(--chart-4))',
+      '5': 'hsl(var(--chart-5))',
+    },
+  };
+
+  return (
+    <div className="relative bg-black/30 z-30 backdrop-blur-xl">
+       <pre>{JSON.stringify(chartColors, null, 4)}</pre>;
+    </div>
+  )
+
+ 
+}
+
+
+
 export default function Home() {
     return (
       <div>
@@ -20,7 +42,7 @@ export default function Home() {
   
           {/* 3) Hero text content on top */}
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-white">
-            <h1 className="text-8xl font-black">The Workbook</h1>
+            <h1 className="text-8xl font-black drop-shadow-deep">The Workbook</h1>
             <p className="text-base md:text-lg mt-4 text-center">
               the place to get some work done in 2025
             </p>
@@ -75,6 +97,7 @@ export default function Home() {
     </Link>
   </nav>
 </section>
+<SamplePreBlock />
 <AllPages />
 
   
@@ -82,8 +105,12 @@ export default function Home() {
         <footer className="py-4 bg-black text-white">
           <div className="flex justify-center gap-8">
             {/* Footer Links */}
+            <h3>footer later</h3>
           </div>
         </footer>
+        <div className="min-h-screen">
+
+        </div>
       </div>
     );
   }
