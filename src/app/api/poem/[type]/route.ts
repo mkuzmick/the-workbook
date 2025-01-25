@@ -1,10 +1,13 @@
 import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 
-export async function POST(req: Request, { params }: { params: { type: string } }) {
+export async function POST(req: Request) {
   try {
     console.log('Received POST request for poem generation.');
-    const { type: poemType } = params;
+
+    // Extract dynamic route parameter
+    const url = new URL(req.url);
+    const poemType = url.pathname.split('/').pop(); // Get the dynamic segment (e.g., "type")
 
     console.log(`Requested Poem Type: ${poemType}`);
 
