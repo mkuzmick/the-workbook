@@ -72,6 +72,9 @@ export default async function Page({
   } catch (error) {
     console.error(`Error rendering project with slug "${slug}":`, error);
     return <div>Project not found</div>;
+  } finally {
+    console.log(`Finished attempting to render project with slug "${slug}"`);
+    // Add any cleanup logic here, if necessary
   }
 }
 
