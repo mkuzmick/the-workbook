@@ -34,21 +34,31 @@ export async function POST(req: Request) {
 
     console.log("Response from Anthropics API:", JSON.stringify(response, null, 2));
 
-    // Extract and return the text content from the first content block
-    const textContent = response.content?.[0]?.text;
+          // Let "firstBlock" be the first item in the content array
+      const firstBlock = response.content?.[0];
 
-    if (!textContent) {
-      console.error("No valid text content found in response.");
-      return NextResponse.json(
-        { message: "No valid response from Anthropics API." },
-        { status: 500 }
-      );
-    }
+      // Narrow by checking type === "text"
+      let textContent: string | undefined;
+      if (firstBlock?.type === "text") {
+        textContent = firstBlock.text;
+      }
 
-    return NextResponse.json({
-      message: "Success",
-      completion: textContent,
-    });
+      if (!textContent) {
+        // handle the error case
+        return NextResponse.json(
+          { message: "No valid response from Anthropics API." },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json({
+        message: "Success",
+        completion: textContent,
+      });
+
+
+
+    
   } catch (error) {
     console.error("Error calling Anthropics API:", error);
     return NextResponse.json(
