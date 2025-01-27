@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
         // Stream the response back to the client
         const encoder = new TextEncoder();
-        const cancelled = false;
+        let cancelled = false;
         const readableStream = new ReadableStream({
             async start(controller) {
                 for await (const chunk of stream) {
