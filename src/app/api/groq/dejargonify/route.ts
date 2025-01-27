@@ -29,16 +29,21 @@ export async function POST(req: NextRequest) {
 
         // Stream the response back to the client
         const encoder = new TextEncoder();
+        let cancelled = false; // Flag to track cancellation
+
         const readableStream = new ReadableStream({
             async start(controller) {
                 for await (const chunk of stream) {
+                    if (cancelled) {
+                        break; // Exit the loop if cancelled
+                    }
                     const content = chunk.choices[0]?.delta?.content || '';
                     controller.enqueue(encoder.encode(content));
                 }
                 controller.close();
             },
             cancel() {
-                stream.destroy();
+                cancelled = true;;
             },
         });
 
