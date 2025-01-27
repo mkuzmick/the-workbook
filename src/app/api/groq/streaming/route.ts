@@ -21,16 +21,20 @@ export async function POST(req: NextRequest) {
 
         // Stream the response back to the client
         const encoder = new TextEncoder();
+        const cancelled = false;
         const readableStream = new ReadableStream({
             async start(controller) {
                 for await (const chunk of stream) {
+                    if (cancelled) {
+                        break; // Exit the loop if cancelled
+                    }
                     const content = chunk.choices[0]?.delta?.content || '';
                     controller.enqueue(encoder.encode(content));
                 }
                 controller.close();
             },
             cancel() {
-                stream.destroy();
+                cancelled = true;
             },
         });
 
