@@ -49,7 +49,6 @@ export async function POST(req: NextRequest) {
           ${JSON.stringify(trimmedCompleteText)} 
           --------------------- \newText: ,
           ${JSON.stringify(newText)}`
-          })
         }
       ];
       
