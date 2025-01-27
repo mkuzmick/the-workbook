@@ -5,12 +5,16 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
 });
 
-interface ChatCompletionMessageParam {
-  role: 'system' | 'user' | 'assistant' | 'function';
-  content?: string; // Optional for 'function'
-  name?: string;    // Required for 'function'
-}
+// interface ChatCompletionMessageParam {
+//   role: 'system' | 'user' | 'assistant' | 'function';
+//   content?: string; // Optional for 'function'
+//   // name?: string;    // Required for 'function'
+// }
 
+type GroqMessage = {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+};
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,7 +26,7 @@ export async function POST(req: NextRequest) {
       .slice(-300)
       .join(' ');
 
-      const messages: ChatCompletionMessageParam[] = [
+      const messages: GroqMessage[] = [
         {
           role: 'system',
           content: `
