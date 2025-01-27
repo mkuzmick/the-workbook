@@ -45,11 +45,12 @@ export async function POST(req: NextRequest) {
         },
         {
           role: 'user',
-          content: JSON.stringify({
-            trimmedCompleteText,
-            newText,
-          }),
-        },
+          content: `trimmedCompleteText: 
+          ${JSON.stringify(trimmedCompleteText)} 
+          --------------------- \newText: ,
+          ${JSON.stringify(newText)}`
+          })
+        }
       ];
       
 
