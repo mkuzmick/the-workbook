@@ -46,6 +46,41 @@ export async function POST(req: NextRequest) {
       }
     ];
 
+    // const stream = await groq.chat.completions.create({
+    //   model: 'llama-3.3-70b-versatile',
+    //   messages,
+    //   temperature: 0.5,
+    //   max_tokens: 1024,
+    //   top_p: 1,
+    //   stop: null,
+    //   stream: true,
+    // });
+
+    // // Stream the response back
+    // const encoder = new TextEncoder();
+    // let cancelled = false; // Flag to track cancellation
+
+    // const readableStream = new ReadableStream({
+    //   async start(controller) {
+    //     try {
+    //       for await (const chunk of stream) {
+    //         if (cancelled) {
+    //             break; // Exit the loop if cancelled
+    //         }
+    //         const content = chunk.choices[0]?.delta?.content || '';
+    //         controller.enqueue(encoder.encode(content));
+    //       }
+    //     } catch (err) {
+    //       controller.error(err);
+    //     } finally {
+    //       controller.close();
+    //     }
+    //   },
+    //   cancel() {
+    //     cancelled = true; // Set the flag to true when the stream is cancelled
+    //   },
+    // });
+
     const stream = await groq.chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages,
@@ -55,29 +90,26 @@ export async function POST(req: NextRequest) {
       stop: null,
       stream: true,
     });
-
+    
     // Stream the response back
     const encoder = new TextEncoder();
-    let cancelled = false; // Flag to track cancellation
-
+    const abortController = new AbortController();
+    
     const readableStream = new ReadableStream({
       async start(controller) {
         try {
           for await (const chunk of stream) {
-            if (cancelled) {
-                break; // Exit the loop if cancelled
-            }
+            if (abortController.signal.aborted) break;
             const content = chunk.choices[0]?.delta?.content || '';
             controller.enqueue(encoder.encode(content));
           }
-        } catch (err) {
-          controller.error(err);
-        } finally {
           controller.close();
+        } catch (error) {
+          controller.error(error);
         }
       },
       cancel() {
-        cancelled = true; // Set the flag to true when the stream is cancelled
+        abortController.abort();
       },
     });
 
