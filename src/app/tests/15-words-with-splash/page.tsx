@@ -79,17 +79,17 @@ export default function MergedPage() {
   }, []);
 
   const updateWords = useCallback(async () => {
-    // Fetch words first
+    // Fetch data first
     const newWords = await fetchWords();
-    setWords(newWords);
 
-    // Fade out the old words
+    // Fade out old words
     setIsVisible(false);
 
-    // After fade-out completes, fade in the new words
+    // Wait for fade-out to complete before updating words and starting fade-in
     setTimeout(() => {
-      setIsVisible(true);
-    }, 300); // Match fade-out timing
+      setWords(newWords); // Update words
+      setIsVisible(true); // Start fade-in
+    }, 300); // Match transition duration
   }, [fetchWords]);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ export default function MergedPage() {
               isVisible ? 'opacity-100' : 'opacity-0'
             } flex flex-col justify-center items-start ${inter.className} font-extrabold leading-tight`}
             style={{
-              transitionDuration: '300ms', // Adjusted for smoother transitions
+              transitionDuration: '300ms', // Smooth transition timing
               fontSize: '5vh', // Dynamic font size for 15 words
               lineHeight: '1.2',
               textAlign: 'left',
