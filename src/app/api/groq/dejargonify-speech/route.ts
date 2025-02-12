@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 import Groq from 'groq-sdk';
 
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 type GroqMessage = {
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   try {
     const { completeText, newText } = await req.json();
 
-    // Take only the most recent 300 words for context
+    // Use only the most recent 300 words for context
     const trimmedCompleteText = completeText
       .split(/\s+/)
       .slice(-300)
@@ -24,28 +24,30 @@ export async function POST(req: NextRequest) {
       {
         role: 'system',
         content: `
-            You are an assistant that identifies "difficult" or specialized words 
-            that a typical college student might not know. The user provides:
-             1. trimmedCompleteText (last 300 words of context)
-             2. newText (the latest ~5 words)
+You are an assistant that identifies "difficult" or specialized words 
+that a typical college student might not know. The user provides:
+  1. trimmedCompleteText (last 300 words of context)
+  2. newText (the latest ~5 words)
             
-            Instructions:
-             - ONLY return newly discovered words that seem difficult or jargony.
-             - If you find no new difficult words, respond with the literal string "false".
-             - If you find new difficult words, respond with a valid JSON array of objects.
-              Each object has the form: { "word": "...", "definition": "..." }.
-             - Keep definitions short and understandable by a typical college student.
-            `,
+Instructions:
+  - ONLY return newly discovered words that seem difficult or jargony.
+  - If you find no new difficult words, respond with the literal string "false".
+  - If you find new difficult words, respond with a valid JSON array of objects.
+    Each object has the form: { "word": "...", "definition": "..." }.
+  - Keep definitions short and understandable by a typical college student.
+        `,
       },
       {
         role: 'user',
         content: `trimmedCompleteText: 
-        ${JSON.stringify(trimmedCompleteText)} 
-        --------------------- \newText: ,
-        ${JSON.stringify(newText)}`
+${JSON.stringify(trimmedCompleteText)}
+---------------------
+newText:
+${JSON.stringify(newText)}`
       }
     ];
 
+    // NOTE: Removed extraneous object literal after temperature.
     const stream = await groq.chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages,
@@ -56,7 +58,7 @@ export async function POST(req: NextRequest) {
       stream: true,
     });
 
-    // Stream the response back
+    // Stream the response back to the client
     const encoder = new TextEncoder();
     let cancelled = false; // Flag to track cancellation
 
@@ -64,9 +66,7 @@ export async function POST(req: NextRequest) {
       async start(controller) {
         try {
           for await (const chunk of stream) {
-            if (cancelled) {
-                break; // Exit the loop if cancelled
-            }
+            if (cancelled) break;
             const content = chunk.choices[0]?.delta?.content || '';
             controller.enqueue(encoder.encode(content));
           }
@@ -77,41 +77,9 @@ export async function POST(req: NextRequest) {
         }
       },
       cancel() {
-        cancelled = true; // Set the flag to true when the stream is cancelled
+        cancelled = true;
       },
     });
-// solution 2:
-    // const stream = await groq.chat.completions.create({
-    //   model: 'llama-3.3-70b-versatile',
-    //   messages,
-    //   temperature: 0.5,
-    //   max_tokens: 1024,
-    //   top_p: 1,
-    //   stop: null,
-    //   stream: true,
-    // });
-    
-    
-    // const encoder = new TextEncoder();
-    // const abortController = new AbortController();
-    
-    // const readableStream = new ReadableStream({
-    //   async start(controller) {
-    //     try {
-    //       for await (const chunk of stream) {
-    //         if (abortController.signal.aborted) break;
-    //         const content = chunk.choices[0]?.delta?.content || '';
-    //         controller.enqueue(encoder.encode(content));
-    //       }
-    //       controller.close();
-    //     } catch (error) {
-    //       controller.error(error);
-    //     }
-    //   },
-    //   cancel() {
-    //     abortController.abort();
-    //   },
-    // });
 
     return new Response(readableStream, {
       headers: {
