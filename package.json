@@ -20,6 +20,7 @@
     "@next/mdx": "^15.1.4",
     "@radix-ui/react-menubar": "^1.1.4",
     "@radix-ui/react-slot": "^1.1.1",
+    "@react-three/fiber": "^8.17.14",
     "@tabler/icons-react": "^3.26.0",
     "@tsparticles/engine": "^3.8.1",
     "@tsparticles/react": "^3.0.0",
@@ -52,6 +53,7 @@
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "three": "^0.173.0",
     "zod": "^3.24.1"
   },
   "overrides": {
