@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { getStaticRoutes } from "@/lib/tools/getStaticRoutes";
+import getStaticRoutes from "@/lib/tools/getStaticRoutes";
 
 export default function Home() {
   const routes = getStaticRoutes();
+  console.log(routes);
 
   return (
     <div>
       <section
         id="links"
-        className="relative z-30 py-16 text-white border-t-slate-700 border-t-2 bg-black cursor-auto"
+        className="relative z-30 py-16 text-white cursor-auto"
       >
         <h2 className="text-3xl font-black text-center mb-4">All Non-Dynamic Pages</h2>
         <nav className="flex flex-col items-center gap-4">
