@@ -22,14 +22,31 @@ type Card = {
   };
 };
 
+// Augment Card with a random color property.
+type AugmentedCard = Card & {
+  iridescenceColor: [number, number, number];
+};
+
+// Helper: for each card, generate a random color within [0, 0.3]
+function addRandomColors(cards: Card[]): AugmentedCard[] {
+  return cards.map(card => ({
+    ...card,
+    iridescenceColor: [
+      Math.random() * 0.5,
+      Math.random() * 0.5,
+      Math.random() * 0.5,
+    ]
+  }));
+}
+
 export default function Page() {
-  const [cards, setCards] = useState<Card[]>([]);
+  const [cards, setCards] = useState<AugmentedCard[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // Use a ref to always have the latest cards array.
-  const cardsRef = useRef<Card[]>([]);
+  const cardsRef = useRef<AugmentedCard[]>([]);
   useEffect(() => {
     cardsRef.current = cards;
   }, [cards]);
@@ -50,40 +67,40 @@ export default function Page() {
     }
   };
 
-  // Load initial data and reverse order so that most recent image is first.
+  // Load initial data and reverse order so the most recent is first.
   useEffect(() => {
     const loadInitial = async () => {
       const fetchedCards = await fetchCards();
-      // Reverse the array before setting state.
-      setCards(fetchedCards.slice().reverse());
+      // Reverse the array and augment with random colors.
+      setCards(addRandomColors(fetchedCards.slice().reverse()));
       setLoading(false);
     };
     loadInitial();
   }, []);
 
-  // Poll every 5 seconds to update the cards state to match the fetched data.
+  // Poll every 5 seconds to update the cards state.
   useEffect(() => {
     const intervalId = setInterval(async () => {
       const fetchedCards = await fetchCards();
-      // Reverse the array so that most recent is first.
-      const reversedFetchedCards = fetchedCards.slice().reverse();
+      const reversed = fetchedCards.slice().reverse();
       setCards((prevCards) => {
-        // Create sets of IDs for comparison.
-        const prevIds = new Set(prevCards.map((card) => card.id));
-        const fetchedIds = new Set(reversedFetchedCards.map((card) => card.id));
-        const isEqual =
-          prevCards.length === reversedFetchedCards.length &&
-          prevCards.every((card) => fetchedIds.has(card.id));
-        return isEqual ? prevCards : reversedFetchedCards;
+        // Compare IDs of previous and fetched data.
+        const prevIds = new Set(prevCards.map(card => card.id));
+        const fetchedIds = new Set(reversed.map(card => card.id));
+        const isEqual = 
+          prevCards.length === reversed.length &&
+          prevCards.every(card => fetchedIds.has(card.id));
+        // If unchanged, do nothing; else update and reassign random colors.
+        return isEqual ? prevCards : addRandomColors(reversed);
       });
-    }, 10000);
+    }, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
   // Set up card rotation interval once (every 10 seconds)
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
+      setCurrentIndex(prevIndex => {
         const length = cardsRef.current.length;
         if (length === 0) return 0;
         return (prevIndex + 1) % length;
@@ -92,21 +109,19 @@ export default function Page() {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Add keydown listener for left/right arrow navigation and immediate update on "u" key.
+  // Add keydown listener for left/right arrow navigation and "u" key update.
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
       if (cardsRef.current.length === 0) return;
       if (e.key === 'ArrowRight') {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % cardsRef.current.length);
+        setCurrentIndex(prevIndex => (prevIndex + 1) % cardsRef.current.length);
       } else if (e.key === 'ArrowLeft') {
-        setCurrentIndex((prevIndex) =>
-          (prevIndex - 1 + cardsRef.current.length) % cardsRef.current.length
-        );
+        setCurrentIndex(prevIndex => (prevIndex - 1 + cardsRef.current.length) % cardsRef.current.length);
       } else if (e.key.toLowerCase() === 'u') {
-        // Immediately update cards and change slide
+        // Immediately update cards with new random colors.
         const fetchedCards = await fetchCards();
-        const reversedFetchedCards = fetchedCards.slice().reverse();
-        setCards(reversedFetchedCards);
+        const reversed = fetchedCards.slice().reverse();
+        setCards(addRandomColors(reversed));
         setCurrentIndex(0);
       }
     };
@@ -136,27 +151,14 @@ export default function Page() {
     : 'Unnamed Creature';
   const imageUrl = currentCard.fields.SlackUrl;
 
-  // Extract additional fields (first value if available)
+  // Extract additional fields (using first value if available)
   const studentName = currentCard.fields["Student Name (from Creatures)"]?.[0] || 'Unknown';
   const contemporaryCondition = currentCard.fields["Contemporary Condition (from Creatures)"]?.[0] || 'Unknown';
   const power = currentCard.fields["Power (from Creatures)"]?.[0] || 'Unknown';
   const temporality = currentCard.fields["Temporality (from Creatures)"]?.[0] || 'Unknown';
-  const color = currentCard.fields["Color (from Creatures)"]?.[0] || 'Unknown';
+  const colorField = currentCard.fields["Color (from Creatures)"]?.[0] || 'Unknown';
   const size = currentCard.fields["Size (from Creatures)"]?.[0] || 'Unknown';
   const habitat = currentCard.fields["Habitat"]?.[0] || 'Unknown';
-
-  // Helper to generate a dynamic iridescence color based on card ID.
-  function getDynamicIridescenceColor(card: Card): [number, number, number] {
-    let hash = 0;
-    for (let i = 0; i < card.id.length; i++) {
-      hash = card.id.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    const r = Math.abs(Math.sin(hash + 1));
-    const g = Math.abs(Math.sin(hash + 2));
-    const b = Math.abs(Math.sin(hash + 3));
-    return [r * 0.3, g * 0.3, b * 0.3];
-  }
-  const dynamicIridescenceColor = getDynamicIridescenceColor(currentCard);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
@@ -172,10 +174,10 @@ export default function Page() {
           {/* Iridescence background */}
           <div className="absolute inset-0">
             <Iridescence
-              color={dynamicIridescenceColor}
+              color={currentCard.iridescenceColor}
               mouseReact={false}
-              amplitude={0.1}
-              speed={1.0}
+              amplitude={0.9}
+              speed={.4}
               className="w-full h-full"
             />
           </div>
@@ -204,7 +206,7 @@ export default function Page() {
               <p><strong>Condition:</strong> {contemporaryCondition}</p>
               <p><strong>Power:</strong> {power}</p>
               <p><strong>Temporality:</strong> {temporality}</p>
-              <p><strong>Color:</strong> {color}</p>
+              <p><strong>Color:</strong> {colorField}</p>
               <p><strong>Size:</strong> {size}</p>
               <p><strong>Habitat:</strong> {habitat}</p>
             </div>
