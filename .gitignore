@@ -42,3 +42,4 @@ next-env.d.ts
 
 _temp
 _local
+.obsidian*
