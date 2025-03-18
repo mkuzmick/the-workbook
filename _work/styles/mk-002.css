@@ -1,0 +1,276 @@
+/* Custom Markdown PDF Stylesheet - Inspired by shadcn UI and Next.js docs */
+
+/* Import Inter font - a modern sans-serif used by both shadcn and Next.js */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --background: #ffffff;
+  --foreground: #020817;
+  --muted: #64748b;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --primary: #18181b;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #18181b;
+  --accent: #f1f5f9;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --ring: #94a3b8;
+  --radius: 0.5rem;
+}
+
+/* Base styles */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--foreground);
+  background-color: var(--background);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-top: 0;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+  color: var(--muted);
+}
+
+/* Paragraphs and text */
+p {
+  margin: 1.25rem 0;
+  line-height: 1.7;
+  font-size: 18px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Links */
+a {
+  color: #0070f3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: 1.5rem;
+  margin: 1.25rem 0;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+li > ul, li > ol {
+  margin: 0.5rem 0;
+}
+
+/* Code blocks */
+pre {
+  padding: 1rem;
+  overflow: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  background-color: var(--secondary);
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.875rem;
+  padding: 0.2em 0.4em;
+  background-color: var(--secondary);
+  border-radius: 0.25rem;
+}
+
+pre code {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 0.875rem;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+th {
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background-color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Horizontal rule */
+hr {
+  height: 1px;
+  background-color: var(--border);
+  border: none;
+  margin: 2.5rem 0;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+}
+
+/* Utility classes */
+.lead {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* Custom callout component - similar to shadcn docs */
+.callout {
+  display: flex;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+  border-left: 4px solid #0070f3;
+  background-color: rgba(0, 112, 243, 0.1);
+}
+
+.callout.warning {
+  border-left-color: #f59e0b;
+  background-color: rgba(245, 158, 11, 0.1);
+}
+
+.callout.error {
+  border-left-color: var(--destructive);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Print-specific styles */
+@media print {
+  body {
+    font-size: 16pt;
+    padding: 0;
+    max-width: none;
+  }
+  
+  pre, code {
+    background-color: #f1f5f9 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  a {
+    color: #0070f3 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  /* Ensure page breaks don't occur in the middle of elements */
+  h1, h2, h3, h4, h5, h6, img, table {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+  
+  /* Add URLs after links when printing */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+    color: var(--muted);
+  }
+  
+  /* Don't show URL for internal links */
+  a[href^="#"]:after {
+    content: "";
+  }
+}
